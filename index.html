@@ -3,69 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>选择入口 - 语学</title>
+    <title>语学 · 选择入口</title>
+    <meta name="description" content="语学 — 进入网页版、查看介绍或打开成绩分析器" />
     <style>
-      body { font-family: sans-serif; text-align: center; padding: 40px 20px; }
-      .card { display: inline-block; max-width: 420px; width: 100%; text-align: left; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-      label { display: block; margin-bottom: 8px; font-weight: 600; }
-      select { width: 100%; padding: 8px; font-size: 16px; }
-      .actions { margin-top: 12px; display:flex; gap:8px; }
-      button { flex:1; padding: 10px; font-size: 16px; cursor: pointer; }
-      a.fallback { display:block; margin-top:14px; text-align:center; }
+      :root{
+        --bg1:#071021;
+        --bg2:#0b1419;
+        --accent:#4CC2FF;
+        --card:#07121a88;
+        --glass: rgba(255,255,255,0.04);
+        --text:#e6f7ff;
+        --muted:#b2cfe6;
+        --btn-bg: linear-gradient(90deg,var(--accent), #34d1ff);
+      }
+      html,body{height:100%;margin:0;font-family:Inter, "Helvetica Neue", Arial, sans-serif;color:var(--text);} 
+      body{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background: radial-gradient(1200px 600px at 10% 10%, rgba(76,194,255,0.06), transparent),
+                    linear-gradient(135deg,var(--bg1),var(--bg2));
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+      }
+      .shell{
+        width:min(680px,94%);
+        padding:28px;
+        border-radius:14px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+        backdrop-filter: blur(6px);
+        display:flex;
+        gap:18px;
+        align-items:center;
+      }
+      .logo{
+        flex:0 0 110px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      }
+      .logo svg{width:96px;height:96px;filter:drop-shadow(0 6px 18px rgba(12,30,45,0.6));}
+      .meta{flex:1;}
+      h1{margin:0;font-size:20px;letter-spacing:0.2px;}
+      p.lead{margin:8px 0 14px;color:var(--muted);font-size:14px;}
+      .buttons{display:flex;gap:12px;flex-wrap:wrap;}
+      .btn{
+        flex:1 1 200px;
+        min-width:160px;
+        padding:12px 14px;
+        border-radius:10px;
+        border:0;
+        color:#07121a;
+        font-weight:700;
+        cursor:pointer;
+        display:inline-flex;
+        gap:10px;
+        align-items:center;
+        justify-content:center;
+        text-decoration:none;
+        transition:transform .12s ease, box-shadow .12s ease;
+      }
+      .btn:active{transform:translateY(1px);}
+      .btn.primary{
+        background:var(--btn-bg);
+        color:#01202a;
+        box-shadow: 0 8px 20px rgba(12,194,255,0.12);
+      }
+      .btn.ghost{
+        background:var(--glass);
+        color:var(--text);
+        border:1px solid rgba(255,255,255,0.04);
+      }
+      .small{font-size:13px;padding:8px 10px;border-radius:8px;font-weight:600;}
+      .foot{margin-top:12px;color:var(--muted);font-size:13px;text-align:center;}
+      a.fallback{color:var(--accent);text-decoration:none;font-weight:600}
+      @media (max-width:560px){ .shell{flex-direction:column;align-items:stretch} .logo{order:-1} }
     </style>
   </head>
   <body>
-    <div class="card">
-      <h1 style="margin-top:0;">语学 — 请选择入口</h1>
-      <p>你可以选择直接进入网页版软件，或查看介绍页了解更多功能与使用说明。</p>
-
-      <label for="entry-select">选择：</label>
-      <select id="entry-select" aria-label="选择进入软件或介绍页">
-        <option value="">-- 请选择 --</option>
-        <option value="./语学-2.7.0-web.html">进入软件本体（网页版）</option>
-        <option value="./语学-介绍页.html">查看介绍页</option>
-      </select>
-
-      <div class="actions">
-        <button id="go-btn" type="button">前往</button>
-        <button id="newtab-btn" type="button">在新标签打开</button>
+    <main class="shell" role="main" aria-labelledby="title">
+      <div class="logo" aria-hidden="true">
+        <!-- 简单矢量 logo -->
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1">
+              <stop offset="0" stop-color="#4CC2FF"/>
+              <stop offset="1" stop-color="#34d1ff"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="8" width="104" height="104" rx="20" fill="url(#g)"/>
+          <path d="M38 46h44v8H38zM38 62h44v8H38zM38 78h30v8H38z" fill="#04121a" opacity="0.96"/>
+        </svg>
       </div>
 
-      <p style="margin-top:12px; color:#555; font-size:14px;">如果你没有选择，页面不会自动跳转；也可以使用下面的静态链接：</p>
-      <p><a href="./语学-2.7.0-web.html">进入软件本体（网页版）</a> · <a href="./语学-介绍页.html">查看介绍页</a></p>
+      <div class="meta">
+        <h1 id="title">语学 Yuxue</h1>
+        <p class="lead">像刷抖音一样刷题 — 线上网页版、介绍页与成绩分析器三选一，快速进入你需要的功能。</p>
 
-      <noscript>
-        <p style="color:#c00;">当前浏览器禁用了 JavaScript，请点击上面的静态链接访问。</p>
-      </noscript>
-    </div>
+        <div class="buttons" role="list">
+          <a class="btn primary" id="btn-web" role="button" href="./语学-2.7.0-web.html">
+            <!-- icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12h18" stroke="#01202a" stroke-width="2" stroke-linecap="round"/></svg>
+            进入网页版
+          </a>
+
+          <a class="btn ghost" id="btn-intro" role="button" href="./语学-介绍页.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18" stroke="#e6f7ff" stroke-width="2" stroke-linecap="round"/></svg>
+            查看介绍页
+          </a>
+
+          <button class="btn ghost small" id="btn-analyzer" type="button" aria-haspopup="true" aria-controls="analyzer-menu" title="打开成绩分析器（若是外部站点将在新标签打开）">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h16M6 16l4-6 4 8 4-12" stroke="#e6f7ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            打开成绩分析器
+          </button>
+        </div>
+
+        <p class="foot">若浏览器禁用 JS，请使用下方静态链接：<br>
+          <a class="fallback" href="./语学-2.7.0-web.html">网页版</a>
+          · <a class="fallback" href="./语学-介绍页.html">介绍页</a>
+          · <a class="fallback" href="https://hong12222.github.io/GradeX/">成绩分析器</a>
+        </p>
+      </div>
+    </main>
+
+    <noscript>
+      <div style="position:fixed;left:12px;right:12px;bottom:12px;background:#ffef; padding:10px;border-radius:8px;color:#800;">
+        JavaScript 已禁用：页面交互会受限，请使用静态链接访问。
+      </div>
+    </noscript>
 
     <script>
-      (function() {
-        const select = document.getElementById('entry-select');
-        const goBtn = document.getElementById('go-btn');
-        const newtabBtn = document.getElementById('newtab-btn');
+      (function(){
+        // ANALYZER_URL: 已设置为你提供的 GradeX 地址
+        const ANALYZER_URL = 'https://hong12222.github.io/GradeX/';
 
-        function navigate(target, newTab) {
-          if (!target) {
-            alert('请先选择要前往的页面。');
+        const btnAnalyzer = document.getElementById('btn-analyzer');
+        btnAnalyzer.addEventListener('click', () => {
+          if (!ANALYZER_URL) {
+            alert('尚未配置成绩分析器的地址，请在 index.html 中设置 ANALYZER_URL。');
             return;
           }
-          if (newTab) window.open(target, '_blank');
-          else window.location.href = target;
-        }
+          // 在新标签打开推荐的成绩分析器
+          window.open(ANALYZER_URL, '_blank', 'noopener');
+        });
 
-        goBtn.addEventListener('click', () => navigate(select.value, false));
-        newtabBtn.addEventListener('click', () => navigate(select.value, true));
-
-        // 可选：如果想保留自动跳转默认行为（以前是自动跳转到语学-2.7.0-web.html），
-        // 取消下面注释：页面加载后 1.5 秒若用户未选择则自动跳转到网页版。
-        /*
-        setTimeout(() => {
-          if (!select.value) {
-            window.location.href = './语学-2.7.0-web.html';
+        // 可选：按键直接进入（回车 / 空格）
+        document.addEventListener('keydown', (e) => {
+          if ((e.key === 'Enter' || e.key === ' ') && document.activeElement === btnAnalyzer) {
+            btnAnalyzer.click();
+            e.preventDefault();
           }
-        }, 1500);
-        */
+        });
       })();
     </script>
   </body>
