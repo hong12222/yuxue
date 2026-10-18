@@ -2,12 +2,71 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=./语学-2.7.0-web.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>正在跳转</title>
+    <title>选择入口 - 语学</title>
+    <style>
+      body { font-family: sans-serif; text-align: center; padding: 40px 20px; }
+      .card { display: inline-block; max-width: 420px; width: 100%; text-align: left; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+      label { display: block; margin-bottom: 8px; font-weight: 600; }
+      select { width: 100%; padding: 8px; font-size: 16px; }
+      .actions { margin-top: 12px; display:flex; gap:8px; }
+      button { flex:1; padding: 10px; font-size: 16px; cursor: pointer; }
+      a.fallback { display:block; margin-top:14px; text-align:center; }
+    </style>
   </head>
-  <body style="font-family: sans-serif; text-align: center; padding: 40px 20px;">
-    <p>正在跳转到网站页面...</p>
-    <p><a href="./语学-2.7.0-web.html">如果没有自动跳转，请点击这里</a></p>
+  <body>
+    <div class="card">
+      <h1 style="margin-top:0;">语学 — 请选择入口</h1>
+      <p>你可以选择直接进入网页版软件，或查看介绍页了解更多功能与使用说明。</p>
+
+      <label for="entry-select">选择：</label>
+      <select id="entry-select" aria-label="选择进入软件或介绍页">
+        <option value="">-- 请选择 --</option>
+        <option value="./语学-2.7.0-web.html">进入软件本体（网页版）</option>
+        <option value="./语学-介绍页.html">查看介绍页</option>
+      </select>
+
+      <div class="actions">
+        <button id="go-btn" type="button">前往</button>
+        <button id="newtab-btn" type="button">在新标签打开</button>
+      </div>
+
+      <p style="margin-top:12px; color:#555; font-size:14px;">如果你没有选择，页面不会自动跳转；也可以使用下面的静态链接：</p>
+      <p><a href="./语学-2.7.0-web.html">进入软件本体（网页版）</a> · <a href="./语学-介绍页.html">查看介绍页</a></p>
+
+      <noscript>
+        <p style="color:#c00;">当前浏览器禁用了 JavaScript，请点击上面的静态链接访问。</p>
+      </noscript>
+    </div>
+
+    <script>
+      (function() {
+        const select = document.getElementById('entry-select');
+        const goBtn = document.getElementById('go-btn');
+        const newtabBtn = document.getElementById('newtab-btn');
+
+        function navigate(target, newTab) {
+          if (!target) {
+            alert('请先选择要前往的页面。');
+            return;
+          }
+          if (newTab) window.open(target, '_blank');
+          else window.location.href = target;
+        }
+
+        goBtn.addEventListener('click', () => navigate(select.value, false));
+        newtabBtn.addEventListener('click', () => navigate(select.value, true));
+
+        // 可选：如果想保留自动跳转默认行为（以前是自动跳转到语学-2.7.0-web.html），
+        // 取消下面注释：页面加载后 1.5 秒若用户未选择则自动跳转到网页版。
+        /*
+        setTimeout(() => {
+          if (!select.value) {
+            window.location.href = './语学-2.7.0-web.html';
+          }
+        }, 1500);
+        */
+      })();
+    </script>
   </body>
 </html>
